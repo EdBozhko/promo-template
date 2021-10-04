@@ -5,7 +5,7 @@ class Header {
   #container
   constructor() {
     this.#logo = new Logo('./js/components/Logo/assets/Logo.png')
-    this.#title = new TemplateTitle('Супер акція')
+    this.#title = new TemplateTitle()
   }
   render(container) {
     this.#container = container
