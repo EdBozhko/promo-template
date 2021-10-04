@@ -5,5 +5,7 @@ class ProductCode extends Title {
   render(container) {
     super.render(container)
     super.titleContainer.classList.add('product__code')
+    super.titleContainer.setAttribute('contenteditable', 'true')
+    super.titleContainer.innerText = 'Код товару'
   }
 }
