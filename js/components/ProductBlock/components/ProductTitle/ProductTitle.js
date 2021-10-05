@@ -6,6 +6,5 @@ class ProductTitle extends Title {
     super.render(container)
     super.titleContainer.classList.add('product__title')
     super.titleContainer.setAttribute('contenteditable', 'true')
-    super.titleContainer.innerText = 'Назва товару'
   }
 }

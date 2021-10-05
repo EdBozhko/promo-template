@@ -86,3 +86,20 @@
 
   /* border: 1px solid red; */
 }
+
+.tools {
+  display: flex;
+gap: 5px;
+}
+
+.tools__label {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+}
+
+.tools__input--select {
+  display: block;
+  width: 45px
+
+}

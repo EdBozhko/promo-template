@@ -9,13 +9,14 @@ class Product {
   #index
   #templateContainer
   constructor(templateContainer, index) {
-    this.#productTitle = new ProductTitle()
-    this.#productCode = new ProductCode()
+    this.#productTitle = new ProductTitle('Назва товару')
+    this.#productCode = new ProductCode('Код товару')
     this.#productImg = new ProductImg()
     this.#productPropertiesBox = new ProductProperties()
-
     this.#index = index
     this.#templateContainer = templateContainer
+
+
   }
   render(container) {
     this.#container = container
