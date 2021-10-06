@@ -10,17 +10,17 @@ class Title {
     this.#index = index
     this.#tools = new Tools(this, this.#index)
   }
-  get titleContainer() {
+  get parent() {
     return this.#titleContainer
   }
-  onTitleFocus =() => {
+  onTitleFocus = () => {
     this.#tools.tools.style.display = 'flex'
   }
   render(container) {
     this.#container = container
     this.#titleBox = document.createElement('div')
     this.#titleBox.classList.add('title-box')
-    this.#titleBox.style.position = 'relative'
+    // this.#titleBox.style.position = 'relative'
     this.#titleContainer = document.createElement('p')
     this.#titleContainer.addEventListener('focus', this.onTitleFocus)
     this.#titleContainer.textContent = this.#title

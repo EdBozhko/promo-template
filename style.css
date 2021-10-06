@@ -6,6 +6,7 @@
 .template__container {
   border: 2px solid black;
   margin: 0 auto;
+  margin-top: 5vh;
   width: 80%;
   aspect-ratio: 16 / 9;
   display: flex;
@@ -30,11 +31,13 @@
   height: 8%;
   background-color: lightblue;
 }
-.template__title {
+.template__header .title-box {
   display: inline-flex;
   justify-content: flex-end;
   align-items: center;
   flex-grow: 1;
+}
+.template__title {
   padding: 1%;
   box-sizing: border-box;
 }
@@ -43,6 +46,7 @@
   display: flex;
   flex-grow: 1;
   flex-wrap: wrap;
+  gap: 0.5vw;
   justify-content: center;
   align-content: stretch;
 }
@@ -51,45 +55,68 @@
   flex: 1 1 30%;
   display: flex;
   flex-direction: column;
-  /* border: 1px solid springgreen; */
 }
 
 .product__title {
-  /* border: 1px solid green; */
 }
 
 .product__code {
-  /* border: 1px solid green; */
 }
 .template__img-and-prop {
   flex-grow: 1;
   display: flex;
+  gap: 0.5vw;
 }
-.template__product img {
-  /* border: 1px solid brown; */
-  flex-basis: 50%;
+.template__img-box {
+  flex-basis: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px dashed black;
+  box-sizing: border-box;
+  position: relative;
 }
+
+.template__img-box .tools__delete-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.template__img-input {
+}
+
 .template__product-properties {
   position: relative;
-  flex-basis: 50%;
-  overflow: hidden;
+  flex-basis: 40%;
   display: flex;
   flex-direction: column;
-
-  /* border: 1px solid gray; */
+  transform: translateX(0);
 }
 .product__add-property-button {
-  position: absolute;
+  position: fixed;
+  right: 0;
+  z-index: 999;
 }
 .template__property {
   display: inline-block;
-
-  /* border: 1px solid red; */
 }
-
+.property-box {
+}
+.tools__delete-button {
+  position: absolute;
+}
 .tools {
   display: flex;
-gap: 5px;
+  width: fit-content;
+  position: absolute;
+  gap: 5px;
+  transform: translateY(100%);
+  background-color: lightskyblue;
+  padding: 5px;
+  box-sizing: border-box;
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
 .tools__label {
@@ -100,6 +127,5 @@ gap: 5px;
 
 .tools__input--select {
   display: block;
-  width: 45px
-
+  width: 45px;
 }

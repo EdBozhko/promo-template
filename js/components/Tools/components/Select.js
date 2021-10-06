@@ -10,16 +10,28 @@ class Select {
   #option
   #defaultValue
   #key
-  constructor(index, key, tool_name, optionsList, defaultValue) {
+  #onSelectChange
+  constructor(
+    index,
+    key,
+    tool_name,
+    optionsList,
+    defaultValue,
+    onSelectChange
+  ) {
     this.#index = index
     this.#tool_name = tool_name
     this.#optionsList = optionsList
     this.#defaultValue = defaultValue
     this.#key = key
+    this.#onSelectChange = onSelectChange
     for (let i = 0; i < this.#optionsList.length; i++) {
       this.#option = new Option(this, this.#optionsList[i])
       this.#options.push(this.#option)
     }
+  }
+  onSelectChange = () => {
+    this.#onSelectChange(this.#input.value)
   }
   render(container) {
     this.#container = container
@@ -27,6 +39,9 @@ class Select {
     this.#label.classList.add('tools__label')
     this.#label.classList.add('tools__label--select')
     this.#input = document.createElement('input')
+
+    this.#input.addEventListener('change', this.onSelectChange)
+
     this.#input.classList.add('tools__input--select')
 
     this.#input.setAttribute('prod', `select-prod-${this.#index}`)
@@ -47,6 +62,5 @@ class Select {
     this.#label.appendChild(this.#input)
     this.#label.appendChild(this.#select)
     this.#container.appendChild(this.#label)
-
   }
 }

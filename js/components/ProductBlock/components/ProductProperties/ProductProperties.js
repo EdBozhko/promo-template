@@ -6,20 +6,27 @@ class ProductProperties {
   #index = 0
   #addPropertyButton
   constructor(onAddPropertyClick) {
-    this.#addPropertyButton = new AddPropertyButton(onAddPropertyClick,'+',this)
-    this.#propertyItems = new Map();
+    this.#addPropertyButton = new AddPropertyButton(
+      onAddPropertyClick,
+      '+',
+      this
+    )
+    this.#propertyItems = new Map()
   }
 
-  get properties(){
+  get properties() {
     return this.#properties
   }
 
-  onAddPropertyPress = (containerId)=>{
-    this.#index++;
-    this.#newProperty = new ProductProperty(this, this.#index);
-    this.#propertyItems.set(this.#index, this.#newProperty);
-    this.#newProperty.render(containerId);
-}
+  onAddPropertyPress = (containerId) => {
+    this.#index++
+    this.#newProperty = new ProductProperty(this, this.#index, 'Властивість')
+    this.#propertyItems.set(this.#index, this.#newProperty)
+    this.#newProperty.render(containerId)
+  }
+  onDeletePropertyPress() {
+    this.#propertyItems.delete(this.#index)
+  }
   render(container) {
     this.#container = container
     this.#properties = document.createElement('div')

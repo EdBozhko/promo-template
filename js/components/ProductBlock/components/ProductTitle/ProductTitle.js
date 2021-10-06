@@ -4,7 +4,7 @@ class ProductTitle extends Title {
   }
   render(container) {
     super.render(container)
-    super.titleContainer.classList.add('product__title')
-    super.titleContainer.setAttribute('contenteditable', 'true')
+    super.parent.classList.add('product__title')
+    super.parent.setAttribute('contenteditable', 'true')
   }
 }
