@@ -21,6 +21,7 @@ class TemplateBody {
     this.#container = container
     this.#body = document.createElement('div')
     this.#body.classList.add('template__body')
+    this.#body.setAttribute('id', 'the_canvas_element_id')
     this.#header.render(this.#body)
     this.#productBlock.render(this.#body)
     this.#container.appendChild(this.#body)

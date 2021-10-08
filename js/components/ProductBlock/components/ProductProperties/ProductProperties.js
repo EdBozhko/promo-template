@@ -27,11 +27,25 @@ class ProductProperties {
   onDeletePropertyPress() {
     this.#propertyItems.delete(this.#index)
   }
+
+  onPropertiesHover = () => {
+    this.#addPropertyButton.button.style.display = 'block'
+  }
+  onPropertiesHoverOut = () => {
+    this.#addPropertyButton.button.style.display = 'none'
+  }
   render(container) {
     this.#container = container
     this.#properties = document.createElement('div')
+
+    this.#properties.addEventListener('mouseover', this.onPropertiesHover)
+    this.#properties.addEventListener('mouseout', this.onPropertiesHoverOut)
+
     this.#properties.classList.add('template__product-properties')
     this.#addPropertyButton.render(this.#properties)
+
+    this.#addPropertyButton.button.style.display = 'none'
+
     this.#container.appendChild(this.#properties)
   }
 }

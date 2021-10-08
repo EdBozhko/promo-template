@@ -20,6 +20,10 @@ class TemplateContainer {
     return this.#body
   }
 
+  get poductItems (){
+    return this.#productItems
+  }
+
   onAddButtonPress = (containerId)=>{
       this.#index++;
       this.#newProduct = new Product(this, this.#index);

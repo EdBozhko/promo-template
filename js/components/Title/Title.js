@@ -14,7 +14,7 @@ class Title {
     return this.#titleContainer
   }
   onTitleFocus = () => {
-    this.#tools.tools.style.display = 'flex'
+    this.#tools.tools.style.display = 'grid'
   }
   render(container) {
     this.#container = container

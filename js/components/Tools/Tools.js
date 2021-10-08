@@ -27,7 +27,7 @@ class Tools {
     this.#fontWeight = new Select(
       this.#index,
       this.#selectKey++,
-      'Жирність',
+      'Жир-ть',
       [100, 400, 900],
       400,
       this.onFontWeightChange
@@ -109,13 +109,17 @@ class Tools {
     this.#tools.classList.add('tools')
     this.#tools.style.display = 'none'
     this.#tools.style.zIndex = 999
+
     this.#fontSize.render(this.#tools)
     this.#fontWeight.render(this.#tools)
+    this.#textColor.render(this.#tools)
+
     this.#textDecoration.render(this.#tools)
     this.#textDecorationThickness.render(this.#tools)
     this.#textDecorationColor.render(this.#tools)
-    this.#textColor.render(this.#tools)
+
     this.#backgroundColor.render(this.#tools)
+    
     this.#closeButton.render(this.#tools)
     this.#container.appendChild(this.#tools)
   }

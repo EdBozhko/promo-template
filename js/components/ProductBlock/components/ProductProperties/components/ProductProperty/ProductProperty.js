@@ -24,7 +24,7 @@ class ProductProperty {
     return this.#property
   }
   onPropertyFocus = () => {
-    this.#tools.tools.style.display = 'flex'
+    this.#tools.tools.style.display = 'grid'
   }
   onPropertyClosePress = () => {
     this.#propertyBox.remove()
