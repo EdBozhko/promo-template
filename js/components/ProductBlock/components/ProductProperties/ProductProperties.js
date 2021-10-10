@@ -24,8 +24,8 @@ class ProductProperties {
     this.#propertyItems.set(this.#index, this.#newProperty)
     this.#newProperty.render(containerId)
   }
-  onDeletePropertyPress() {
-    this.#propertyItems.delete(this.#index)
+  onDeletePropertyPress(index) {
+    this.#propertyItems.delete(index)
   }
 
   onPropertiesHover = () => {

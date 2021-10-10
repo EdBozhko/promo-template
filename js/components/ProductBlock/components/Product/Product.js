@@ -12,6 +12,7 @@ class Product {
   #inputEvent
   #reader
   #deleteImg
+  #deleteProduct
   constructor(templateContainer, index) {
     this.#productTitle = new ProductTitle('Назва товару')
     this.#productCode = new ProductCode('Код товару')
@@ -25,8 +26,14 @@ class Product {
       'delete-img',
       this
     )
+    this.#deleteProduct = new DeletePropertyButton(
+      this.onProductDeletePress,
+      'x',
+      'delete-product',
+      this
+    )
   }
-  get productTitle (){
+  get productTitle() {
     return this.#productTitle
   }
   onDeleteImgPress = () => {
@@ -36,7 +43,6 @@ class Product {
   }
   onImgInputChange = (event) => {
     this.#inputEvent = event.target
-    console.log(this.#inputEvent)
     this.#reader.onloadend = () => {
       this.#imgBox.style.background = `url(${
         this.#reader.result
@@ -57,26 +63,25 @@ class Product {
   onImgHoverOut = () => {
     this.#deleteImg.button.style.display = 'none'
   }
-  onImgDrag =(ev)=>{
-    ev.preventDefault();
+  onImgDrag = (ev) => {
+    ev.preventDefault()
     this.#imgBox.classList.add('template__img-box--drag')
   }
-  onImgDrop = (ev)=>{
-
-    ev.preventDefault();
+  onImgDrop = (ev) => {
+    ev.preventDefault()
     this.#imgBox.classList.remove('template__img-box--drag')
 
     if (ev.dataTransfer.items) {
       for (let i = 0; i < ev.dataTransfer.items.length; i++) {
         if (ev.dataTransfer.items[i].kind === 'file') {
-          this.#inputEvent = ev.dataTransfer.items[i].getAsFile();
+          this.#inputEvent = ev.dataTransfer.items[i].getAsFile()
 
           this.#reader.onloadend = () => {
             this.#imgBox.style.background = `url(${
               this.#reader.result
             }) center/contain no-repeat`
           }
-      
+
           if (this.#inputEvent) {
             this.#reader.readAsDataURL(this.#inputEvent)
             this.#input.style.display = 'none'
@@ -87,27 +92,42 @@ class Product {
         }
       }
     } else {
-      for (let i = 0; i < ev.dataTransfer.files.length; i++) {
-      }
+      for (let i = 0; i < ev.dataTransfer.files.length; i++) {}
     }
   }
-onDragEnterHandler = ()=>{
-  this.#imgBox.classList.add('template__img-box--drag')
-
-}
-onDragLeveHandler = ()=>{
-  this.#imgBox.classList.remove('template__img-box--drag')
-
-}
-
+  onDragEnterHandler = () => {
+    this.#imgBox.classList.add('template__img-box--drag')
+  }
+  onDragLeveHandler = () => {
+    this.#imgBox.classList.remove('template__img-box--drag')
+  }
+  onProductDeletePress = () => {
+    this.#product.remove()
+    this.#templateContainer.onDeletePropertyPress()
+  }
+  onProdHover = () => {
+    this.#deleteProduct.button.style.display = 'block'
+  }
+  onProdHoverOut = () => {
+    this.#deleteProduct.button.style.display = 'none'
+  }
   render(container) {
     this.#container = container
     this.#product = document.createElement('div')
     this.#product.classList.add('template__product')
-    this.#productTitle.render(this.#product)
-    this.#productCode.render(this.#product)
+
+    this.#product.addEventListener('mouseover', this.onProdHover)
+    this.#product.addEventListener('mouseout', this.onProdHoverOut)
+
+    this.#deleteProduct.render(this.#product)
+    this.#deleteProduct.button.classList.add('template__product-delete')
+    this.#deleteProduct.button.style.display = 'none'
+
     this.#imgAndPropertiesBox = document.createElement('div')
     this.#imgAndPropertiesBox.classList.add('template__img-and-prop')
+
+    this.#productTitle.render(this.#imgAndPropertiesBox)
+    this.#productCode.render(this.#imgAndPropertiesBox)
     this.#imgBox = document.createElement('div')
 
     this.#imgBox.addEventListener('mouseover', this.onImgHover)
@@ -115,12 +135,11 @@ onDragLeveHandler = ()=>{
 
     this.#imgBox.addEventListener('dragover', this.onImgDrag)
     this.#imgBox.addEventListener('drop', this.onImgDrop)
-    
+
     this.#imgBox.addEventListener('dragenter', this.onDragEnterHandler)
-    
+
     this.#imgBox.addEventListener('dragleave', this.onDragLeveHandler)
     this.#imgBox.addEventListener('dragend', this.onDragLeveHandler)
-
 
     this.#imgBox.classList.add('template__img-box')
 
@@ -132,7 +151,7 @@ onDragLeveHandler = ()=>{
     this.#deleteImg.button.style.display = 'none'
     this.#imgBox.appendChild(this.#input)
 
-    this.#imgAndPropertiesBox.appendChild(this.#imgBox)
+    this.#product.appendChild(this.#imgBox)
     this.#productPropertiesBox.render(this.#imgAndPropertiesBox)
     this.#product.appendChild(this.#imgAndPropertiesBox)
     this.#container.appendChild(this.#product)

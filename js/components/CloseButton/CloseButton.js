@@ -7,7 +7,6 @@ class ClosesButton extends Button {
     this.#parent = parent
   }
   onButtonClick = () => {
-    console.log(this.#parent)
     this.#parent.onCloseButtonPress()
   }
   render(container) {

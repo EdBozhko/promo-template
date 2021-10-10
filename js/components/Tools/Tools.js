@@ -13,9 +13,13 @@ class Tools {
   #selectKey = 0
   #colorKey = 0
   #closeButton
-  constructor(parent, index) {
+  #templateContainer
+  #root
+  constructor(parent, index, templateContainer) {
     this.#parent = parent
     this.#index = index
+    this.#templateContainer = templateContainer
+    this.#root = document.querySelector(':root')
     this.#fontSize = new Select(
       this.#index,
       this.#selectKey++,
@@ -82,27 +86,121 @@ class Tools {
   onCloseButtonPress = () => {
     this.#tools.style.display = 'none'
   }
+
   onFontSizeChange = (value) => {
-    this.#parent.parent.style.fontSize = `${value}px`
+    switch (this.constructor) {
+      case GlobalTitleTools:
+        return this.#root.style.setProperty('--prodTitleFontSize', `${value}px`)
+      case GlobalCodeTools:
+        return this.#root.style.setProperty('--prodCodeFontSize', `${value}px`)
+      case GlobalPropertyTools:
+        return this.#root.style.setProperty(
+          '--prodPropertiesFontSize',
+          `${value}px`
+        )
+      default:
+        return (this.#parent.parent.style.fontSize = `${value}px`)
+    }
   }
   onFontWeightChange = (value) => {
-    this.#parent.parent.style.fontWeight = value
-  }
-  onTextDecorationChange = (value) => {
-    this.#parent.parent.style.textDecoration = value
-  }
-  onTextDecorationThicknessChange = (value) => {
-    this.#parent.parent.style.textDecorationThickness = `${value}px`
+    switch (this.constructor) {
+      case GlobalTitleTools:
+        return this.#root.style.setProperty('--prodTitleFontWeight', value)
+      case GlobalCodeTools:
+        return this.#root.style.setProperty('--prodCodeFontWeight', value)
+      case GlobalPropertyTools:
+        return this.#root.style.setProperty('--prodPropertiesFontWeight', value)
+      default:
+        return (this.#parent.parent.style.fontWeight = value)
+    }
   }
   onColorChange = (value) => {
-    this.#parent.parent.style.color = value
+    switch (this.constructor) {
+      case GlobalTitleTools:
+        return this.#root.style.setProperty('--prodTitleTextColor', value)
+      case GlobalCodeTools:
+        return this.#root.style.setProperty('--prodCodeTextColor', value)
+      case GlobalPropertyTools:
+        return this.#root.style.setProperty('--prodPropertiesColor', value)
+      default:
+        return (this.#parent.parent.style.color = value)
+    }
   }
-  onBackgroundColorChange = (value) => {
-    this.#parent.parent.style.backgroundColor = value
+
+  onTextDecorationChange = (value) => {
+    switch (this.constructor) {
+      case GlobalTitleTools:
+        return this.#root.style.setProperty('--prodTitleTextDecoration', value)
+      case GlobalCodeTools:
+        return this.#root.style.setProperty('--prodCodeTextDecoration', value)
+      case GlobalPropertyTools:
+        return this.#root.style.setProperty(
+          '--prodPropertiesTextDecoration',
+          value
+        )
+      default:
+        return (this.#parent.parent.style.textDecoration = value)
+    }
+  }
+  onTextDecorationThicknessChange = (value) => {
+    switch (this.constructor) {
+      case GlobalTitleTools:
+        return this.#root.style.setProperty(
+          '--prodTitleTextDecorationThickness',
+          `${value}px`
+        )
+      case GlobalCodeTools:
+        return this.#root.style.setProperty(
+          '--prodCodeTextDecorationThickness',
+          `${value}px`
+        )
+      case GlobalPropertyTools:
+        return this.#root.style.setProperty(
+          '--prodPropertiesTextDecorationThickness',
+          `${value}px`
+        )
+      default:
+        return (this.#parent.parent.style.textDecorationThickness = `${value}px`)
+    }
   }
   onTextDecorationColorChange = (value) => {
-    this.#parent.parent.style.textDecorationColor = value
+    switch (this.constructor) {
+      case GlobalTitleTools:
+        return this.#root.style.setProperty(
+          '--prodTitleTextDecorationColor',
+          value
+        )
+      case GlobalCodeTools:
+        return this.#root.style.setProperty(
+          '--prodCodeTextDecorationColor',
+          value
+        )
+      case GlobalPropertyTools:
+        return this.#root.style.setProperty(
+          '--prodPropertiesTextDecorationColor',
+          value
+        )
+      default:
+        return (this.#parent.parent.style.textDecorationColor = value)
+    }
   }
+
+  onBackgroundColorChange = (value) => {
+    switch (this.constructor) {
+      case GlobalTitleTools:
+        return this.#root.style.setProperty('--prodTitleTextBackground', value)
+      case GlobalCodeTools:
+        return this.#root.style.setProperty('--prodCodeTextBackground', value)
+      case GlobalPropertyTools:
+        return this.#root.style.setProperty(
+          '--prodPropertiesTextBackground',
+          value
+        )
+      default:
+        return (this.#parent.parent.style.backgroundColor = value)
+    }
+  }
+
   render(container) {
     this.#container = container
     this.#tools = document.createElement('div')
@@ -119,7 +217,7 @@ class Tools {
     this.#textDecorationColor.render(this.#tools)
 
     this.#backgroundColor.render(this.#tools)
-    
+
     this.#closeButton.render(this.#tools)
     this.#container.appendChild(this.#tools)
   }

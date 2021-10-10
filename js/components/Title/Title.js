@@ -20,7 +20,6 @@ class Title {
     this.#container = container
     this.#titleBox = document.createElement('div')
     this.#titleBox.classList.add('title-box')
-    // this.#titleBox.style.position = 'relative'
     this.#titleContainer = document.createElement('p')
     this.#titleContainer.addEventListener('focus', this.onTitleFocus)
     this.#titleContainer.textContent = this.#title

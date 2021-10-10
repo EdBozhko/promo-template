@@ -28,7 +28,7 @@ class ProductProperty {
   }
   onPropertyClosePress = () => {
     this.#propertyBox.remove()
-    this.#parent.onDeletePropertyPress()
+    this.#parent.onDeletePropertyPress(this.#index)
   }
   onProperyHover = () => {
     this.#deleteButton.button.style.display = 'block'
