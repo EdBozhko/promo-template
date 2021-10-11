@@ -126,8 +126,8 @@ class Product {
     this.#imgAndPropertiesBox = document.createElement('div')
     this.#imgAndPropertiesBox.classList.add('template__img-and-prop')
 
-    this.#productTitle.render(this.#imgAndPropertiesBox)
-    this.#productCode.render(this.#imgAndPropertiesBox)
+    this.#productTitle.render(this.#product)
+    this.#productCode.render(this.#product)
     this.#imgBox = document.createElement('div')
 
     this.#imgBox.addEventListener('mouseover', this.onImgHover)
@@ -151,7 +151,7 @@ class Product {
     this.#deleteImg.button.style.display = 'none'
     this.#imgBox.appendChild(this.#input)
 
-    this.#product.appendChild(this.#imgBox)
+    this.#imgAndPropertiesBox.appendChild(this.#imgBox)
     this.#productPropertiesBox.render(this.#imgAndPropertiesBox)
     this.#product.appendChild(this.#imgAndPropertiesBox)
     this.#container.appendChild(this.#product)
