@@ -8,6 +8,9 @@ class TemplateSettings {
   #titleTools
   #codeTools
   #propertyTools
+  #globalProdNameToolTitle
+  #globalProdCodeToolTitle
+  #globalProdPropsToolTitle
   constructor(templateContainer, onAddButtonClick) {
     this.#templateContainer = templateContainer
     this.#addProductButton = new AddProductButton(
@@ -62,12 +65,22 @@ class TemplateSettings {
     )
     this.#screenshotButton.button.classList.add('template__screenshot')
 
+    this.#globalProdNameToolTitle = document.createElement('span')
+    this.#globalProdCodeToolTitle = document.createElement('span')
+    this.#globalProdPropsToolTitle = document.createElement('span')
+
+    this.#globalProdNameToolTitle.innerText = 'Всі "Назви товарів"'
+    this.#settings.appendChild(this.#globalProdNameToolTitle)
     this.#titleTools.render(this.#settings)
     this.#titleTools.tools.setAttribute('title', 'Всі "Назви товарів"')
 
+    this.#globalProdCodeToolTitle.innerText = 'Всі "Коди товарів"'
+    this.#settings.appendChild(this.#globalProdCodeToolTitle)
     this.#codeTools.render(this.#settings)
     this.#codeTools.tools.setAttribute('title', 'Всі "Коди товарів"')
 
+    this.#globalProdPropsToolTitle.innerText = 'Всі "Властивості товарів"'
+    this.#settings.appendChild(this.#globalProdPropsToolTitle)
     this.#propertyTools.render(this.#settings)
     this.#propertyTools.tools.setAttribute('title', 'Всі "Властивості товарів"')
 
