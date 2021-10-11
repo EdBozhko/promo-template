@@ -30,6 +30,9 @@ class Select {
       this.#options.push(this.#option)
     }
   }
+  get select() {
+    return this.#input
+  }
   onSelectChange = () => {
     this.#onSelectChange(this.#input.value)
   }

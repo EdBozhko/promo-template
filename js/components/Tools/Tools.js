@@ -41,7 +41,7 @@ class Tools {
       this.#selectKey++,
       'Декор',
       ['underline', 'overline', 'line-through'],
-      'none',
+      '',
       this.onTextDecorationChange
     )
     this.#textDecorationThickness = new Select(
@@ -201,6 +201,11 @@ class Tools {
     }
   }
 
+  onTextDecorationFocus = () => {
+    // debugger
+    this.#textDecoration.select.value = ''
+    console.log(this.#textDecoration)
+  }
   render(container) {
     this.#container = container
     this.#tools = document.createElement('div')
@@ -215,6 +220,11 @@ class Tools {
     this.#textDecoration.render(this.#tools)
     this.#textDecorationThickness.render(this.#tools)
     this.#textDecorationColor.render(this.#tools)
+
+    this.#textDecoration.select.addEventListener(
+      'focus',
+      this.onTextDecorationFocus
+    )
 
     this.#backgroundColor.render(this.#tools)
 
