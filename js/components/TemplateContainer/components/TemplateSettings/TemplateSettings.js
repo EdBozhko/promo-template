@@ -11,7 +11,13 @@ class TemplateSettings {
   #globalProdNameToolTitle
   #globalProdCodeToolTitle
   #globalProdPropsToolTitle
+  #columnsQuantity
+  #columnsQuantityTitle
+  #option
+  #root
   constructor(templateContainer, onAddButtonClick) {
+    this.#root = document.querySelector(':root')
+    this.#option = new Option()
     this.#templateContainer = templateContainer
     this.#addProductButton = new AddProductButton(
       onAddButtonClick,
@@ -49,7 +55,12 @@ class TemplateSettings {
       }
     )
   }
-
+  onColumnQuantityChange = () => {
+    this.#root.style.setProperty(
+      '--columnsQuantity',
+      +this.#columnsQuantity.value
+    )
+  }
   render(container) {
     this.#container = container
     this.#settings = document.createElement('div')
@@ -68,6 +79,23 @@ class TemplateSettings {
     this.#globalProdNameToolTitle = document.createElement('span')
     this.#globalProdCodeToolTitle = document.createElement('span')
     this.#globalProdPropsToolTitle = document.createElement('span')
+    this.#columnsQuantityTitle = document.createElement('span')
+
+    this.#columnsQuantityTitle.innerText = 'Кіль-ть колонок'
+    this.#settings.appendChild(this.#columnsQuantityTitle)
+    this.#columnsQuantity = document.createElement('select')
+    this.#columnsQuantity.addEventListener(
+      'change',
+      this.onColumnQuantityChange
+    )
+    this.#settings.appendChild(this.#columnsQuantityTitle)
+    this.#settings.appendChild(this.#columnsQuantity)
+
+    for (let i = 0; i < 3; i++) {
+      this.#option.render(this.#columnsQuantity)
+      this.#option.option.innerText = i + 1
+      this.#option.option.value = i + 1
+    }
 
     this.#globalProdNameToolTitle.innerText = 'Всі "Назви товарів"'
     this.#settings.appendChild(this.#globalProdNameToolTitle)
